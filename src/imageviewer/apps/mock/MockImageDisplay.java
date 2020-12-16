@@ -14,7 +14,7 @@ public class MockImageDisplay implements ImageDisplay {
     }
 
     @Override
-    public Image current() {
+    public Image currentImage() {
         return this.image;
     }
 

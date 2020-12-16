@@ -1,8 +1,22 @@
 package imageviewer.apps.swing;
 
+import imageviewer.control.Command;
+import imageviewer.control.NextImageCommand;
+import imageviewer.control.PrevImageCommand;
+import imageviewer.model.Image;
+import imageviewer.view.ImageDisplay;
+
 import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.util.HashMap;
+import java.util.List;
 
 public class Main extends JFrame {
+
+    private List<Image> images;
+    private ImageDisplay imageDisplay;
+    private HashMap<String, Command> commands = new HashMap<>();
 
     public static void main(String[] args) {
         new Main().execute();
@@ -14,15 +28,34 @@ public class Main extends JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.getContentPane().add(imagePanel());
+        this.add(toolBar(), BorderLayout.SOUTH);
+    }
+
+    private void execute() {
+        this.images = new FileImageLoader(new File("fotos")).load();
+        this.imageDisplay.display(images.get(0));
+        this.commands.put("<", new PrevImageCommand(images, imageDisplay));
+        this.commands.put(">", new NextImageCommand(images, imageDisplay));
+        this.setVisible(true);
     }
 
     private JPanel imagePanel() {
         BlockPanel blockPanel = new BlockPanel();
+        this.imageDisplay = blockPanel;
         return blockPanel;
     }
 
-    private void execute() {
-        this.setVisible(true);
+    private JMenuBar toolBar() {
+        JMenuBar toolbar = new JMenuBar();
+        toolbar.add(button("<"));
+        toolbar.add(button(">"));
+        return toolbar;
+    }
+
+    private JButton button(String name) {
+        JButton button = new JButton(name);
+        button.addActionListener(e -> commands.get(name).execute());
+        return button;
     }
 
 }

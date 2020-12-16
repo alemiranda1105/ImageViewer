@@ -1,7 +1,7 @@
 package imageviewer.apps.mock;
 
 import imageviewer.control.Command;
-import imageviewer.control.ExitCommand;
+import imageviewer.control.ExitImageCommand;
 import imageviewer.control.LoadCommand;
 import imageviewer.control.NextImageCommand;
 import imageviewer.control.NullCommand;
@@ -31,14 +31,13 @@ public class Main {
         ImageLoader imageLoader = new MockImageLoader();
         Map<String, Command> commands = new HashMap<>();
         commands.put("l", new LoadCommand(imageLoader, imageList, imageDisplay));
-        commands.put("q", new ExitCommand());
+        commands.put("q", new ExitImageCommand());
         commands.put("p", new PrevImageCommand(imageList, imageDisplay));
         commands.put("n", new NextImageCommand(imageList, imageDisplay));
         return commands;
     }
 
     private static ImageDisplay createImageDisplay() {
-        ImageDisplay imageDisplay = new MockImageDisplay();
-        return imageDisplay;
+        return new MockImageDisplay();
     }
 }

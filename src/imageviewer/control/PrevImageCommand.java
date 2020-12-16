@@ -6,11 +6,11 @@ import java.util.List;
 
 public class PrevImageCommand implements Command {
     
-    private final List<Image> imageList;
+    private final List<Image> images;
     private final ImageDisplay imageDisplay;
 
-    public PrevImageCommand(List<Image> imageList, ImageDisplay imageDisplay) {
-        this.imageList = imageList;
+    public PrevImageCommand(List<Image> images, ImageDisplay imageDisplay) {
+        this.images = images;
         this.imageDisplay = imageDisplay;
     }
 
@@ -20,9 +20,16 @@ public class PrevImageCommand implements Command {
     }
 
     private Image prev() {
-        int index = imageList.indexOf(imageDisplay.current());
-        index = (index - 1 + imageList.size()) % imageList.size();
-        return imageList.get(index);
+        return images.get(prevIndex());
+    }
+
+    private int prevIndex() {
+        if(currentIndex() == 0) return images.size()-1;
+        return (currentIndex() - 1 % images.size());
+    }
+
+    private int currentIndex() {
+        return images.indexOf(imageDisplay.currentImage());
     }
 
 }

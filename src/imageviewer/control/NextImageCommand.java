@@ -6,11 +6,11 @@ import java.util.List;
 
 public class NextImageCommand implements Command {
     
-    private final List<Image> imageList;
+    private final List<Image> images;
     private final ImageDisplay imageDisplay;
 
-    public NextImageCommand(List<Image> imageList, ImageDisplay imageDisplay) {
-        this.imageList = imageList;
+    public NextImageCommand(List<Image> images, ImageDisplay imageDisplay) {
+        this.images = images;
         this.imageDisplay = imageDisplay;
     }
     
@@ -20,8 +20,16 @@ public class NextImageCommand implements Command {
     }
 
     private Image next() {
-        int index = imageList.indexOf(imageDisplay.current());
-        index = (index + 1) % imageList.size();
-        return imageList.get(index);
+        return images.get(nextIndex());
     }
+
+    private int nextIndex() {
+        if(currentIndex() >= images.size()-1) return 0;
+        return (currentIndex() + 1 % images.size());
+    }
+
+    private int currentIndex() {
+        return images.indexOf(imageDisplay.currentImage());
+    }
+
 }

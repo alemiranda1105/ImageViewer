@@ -1,6 +1,6 @@
 package imageviewer.control;
 
-public class ExitCommand implements Command {
+public class ExitImageCommand implements Command {
 
     @Override
     public void execute() {
