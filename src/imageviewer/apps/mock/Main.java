@@ -1,4 +1,4 @@
-package imageviewer;
+package imageviewer.apps.mock;
 
 import imageviewer.control.Command;
 import imageviewer.control.ExitCommand;

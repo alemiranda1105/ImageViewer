@@ -1,4 +1,4 @@
-package imageviewer;
+package imageviewer.apps.mock;
 
 import imageviewer.model.Image;
 import imageviewer.view.ImageDisplay;
