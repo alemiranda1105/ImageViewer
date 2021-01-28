@@ -1,4 +1,4 @@
-package imageviewer.control;
+package imageviewer.presenter;
 
 import imageviewer.model.Image;
 import imageviewer.view.ImageDisplay;
