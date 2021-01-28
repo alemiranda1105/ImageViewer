@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class FileImageLoader implements ImageLoader {
     private final File root;
@@ -18,7 +19,7 @@ public class FileImageLoader implements ImageLoader {
     @Override
     public List<Image> load() {
         List<Image> list = new ArrayList<>();
-        for(File file: root.listFiles(imageFilter())) {
+        for(File file: Objects.requireNonNull(root.listFiles(imageFilter()))) {
             list.add(new Image(file.getAbsolutePath()));
         }
         return list;

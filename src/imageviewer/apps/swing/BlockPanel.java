@@ -125,7 +125,7 @@ public class BlockPanel extends JPanel implements ImageDisplay {
 
         @Override
         public void mousePressed(MouseEvent e) {
-            this.initial = e.getX();
+            this.initial = (int) (e.getX()*1.5);
         }
 
         @Override
