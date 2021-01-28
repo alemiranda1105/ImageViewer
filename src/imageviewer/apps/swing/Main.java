@@ -1,6 +1,7 @@
 package imageviewer.apps.swing;
 
 import imageviewer.control.Command;
+import imageviewer.control.ImagePresenter;
 import imageviewer.control.NextImageCommand;
 import imageviewer.control.PrevImageCommand;
 import imageviewer.model.Image;
@@ -14,9 +15,9 @@ import java.util.List;
 
 public class Main extends JFrame {
 
-    private List<Image> images;
     private ImageDisplay imageDisplay;
-    private HashMap<String, Command> commands = new HashMap<>();
+    private final HashMap<String, Command> commands = new HashMap<>();
+    private ImagePresenter imagePresenter;
 
     public static void main(String[] args) {
         new Main().execute();
@@ -32,8 +33,9 @@ public class Main extends JFrame {
     }
 
     private void execute() {
-        this.images = new FileImageLoader(new File("fotos")).load();
+        List<Image> images = new FileImageLoader(new File("fotos")).load();
         this.imageDisplay.display(images.get(0));
+        this.imagePresenter = new ImagePresenter(images, imageDisplay);
         this.commands.put("<", new PrevImageCommand(images, imageDisplay));
         this.commands.put(">", new NextImageCommand(images, imageDisplay));
         this.setVisible(true);

@@ -3,14 +3,15 @@ package imageviewer.apps.mock;
 import imageviewer.model.Image;
 import imageviewer.view.ImageDisplay;
 
-public class MockImageDisplay implements ImageDisplay {
+
+ class MockImageDisplay implements ImageDisplay {
 
     private Image image;
 
     @Override
     public void display(Image image) {
         this.image = image;
-        System.out.println(image.getName());
+        System.out.println(image.name());
     }
 
     @Override
@@ -18,4 +19,9 @@ public class MockImageDisplay implements ImageDisplay {
         return this.image;
     }
 
-}
+     @Override
+     public void on(Shift shift) {
+
+     }
+
+ }

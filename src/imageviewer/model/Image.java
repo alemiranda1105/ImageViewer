@@ -7,7 +7,7 @@ public class Image {
         this.name = name;
     }
 
-    public String getName() {
+    public String name() {
         return this.name;
     }
 
